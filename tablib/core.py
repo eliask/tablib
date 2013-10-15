@@ -224,7 +224,7 @@ class Dataset(object):
             return '<dataset object>'
 
     def __unicode__(self):
-        result = [self.__headers]
+        result = [self.__headers] if self.__headers is not None else []
 
         result.extend(list(map(unicode, row)) for row in self._data)
 

@@ -36,6 +36,18 @@ if sys.argv[-1] == 'test':
     os.system('py.test test_tablib.py')
     sys.exit()
 
+python3_packages = []
+if sys.version_info >= (3,):
+    python3_packages = [
+        'tablib.packages.xlwt3',
+        'tablib.packages.xlrd3',
+        'tablib.packages.odf3',
+        'tablib.packages.openpyxl3',
+        'tablib.packages.openpyxl3.shared',
+        'tablib.packages.openpyxl3.reader',
+        'tablib.packages.openpyxl3.writer',
+    ]
+
 setup(
     name='tablib',
     version=tablib.__version__,
@@ -46,26 +58,20 @@ setup(
     author_email='me@kennethreitz.com',
     url='http://python-tablib.org',
     packages=[
-        'tablib', 'tablib.formats',
+        'tablib',
+        'tablib.formats',
         'tablib.packages',
         'tablib.packages.xlwt',
-        'tablib.packages.xlwt3',
         'tablib.packages.xlrd',
-        'tablib.packages.xlrd3',
         'tablib.packages.omnijson',
         'tablib.packages.odf',
-        'tablib.packages.odf3',
         'tablib.packages.openpyxl',
         'tablib.packages.openpyxl.shared',
         'tablib.packages.openpyxl.reader',
         'tablib.packages.openpyxl.writer',
-        'tablib.packages.openpyxl3',
-        'tablib.packages.openpyxl3.shared',
-        'tablib.packages.openpyxl3.reader',
-        'tablib.packages.openpyxl3.writer',
         'tablib.packages.yaml',
         'tablib.packages.unicodecsv'
-    ],
+    ] + python3_packages,
     license='MIT',
     classifiers=(
         'Development Status :: 5 - Production/Stable',

@@ -998,16 +998,14 @@ def detect(stream):
 
 
 def import_set(stream):
-    """Return dataset of given stream."""
+    """Return dataset of given stream or None if dataset could not be detected or loaded."""
     (format, stream) = detect(stream)
-
-    try:
-        data = Dataset()
-        format.import_set(data, stream)
-        return data
-
-    except AttributeError:
+    if format is None:
         return None
+
+    data = Dataset()
+    format.import_set(data, stream)
+    return data
 
 
 def import_book(stream):

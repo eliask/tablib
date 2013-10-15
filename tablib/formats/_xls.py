@@ -23,18 +23,8 @@ def detect(stream):
     try:
         xlrd.open_workbook(file_contents=stream)
         return True
-    except (TypeError, XLRDError):
+    except XLRDError:
         pass 
-    try:
-        xlrd.open_workbook(file_contents=stream.read())
-        return True
-    except (AttributeError, XLRDError):
-        pass
-    try:
-        xlrd.open_workbook(filename=stream)
-        return True
-    except:
-        return False
 
 
 def export_set(dataset):

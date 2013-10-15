@@ -235,7 +235,7 @@ class Dataset(object):
         # delimiter between header and data
         result.insert(1, ['-' * length for length in field_lens])
 
-        format_string = '|'.join('{%s:%s}' % item for item in enumerate(field_lens))
+        format_string = '|'.join('{:>%d}' % x for x in field_lens)
 
         return '\n'.join(format_string.format(*row) for row in result)
 

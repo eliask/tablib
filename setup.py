@@ -33,7 +33,7 @@ if sys.argv[-1] == 'test':
         print('py.test required.')
         sys.exit(1)
 
-    os.system('pytest test_tablib.py')
+    os.system('py.test test_tablib.py')
     sys.exit()
 
 setup(
@@ -44,20 +44,25 @@ setup(
         open('HISTORY.rst').read()),
     author='Kenneth Reitz',
     author_email='me@kennethreitz.com',
-    url='http://tablib.org',
+    url='http://python-tablib.org',
     packages=[
         'tablib', 'tablib.formats',
         'tablib.packages',
         'tablib.packages.xlwt',
+        'tablib.packages.xlwt3',
         'tablib.packages.xlrd',
-        'tablib.packages.odf',
+        'tablib.packages.xlrd3',
         'tablib.packages.omnijson',
-        'tablib.packages.omnijson.packages',
-        'tablib.packages.omnijson.packages.simplejson',
+        'tablib.packages.odf',
+        'tablib.packages.odf3',
         'tablib.packages.openpyxl',
         'tablib.packages.openpyxl.shared',
         'tablib.packages.openpyxl.reader',
         'tablib.packages.openpyxl.writer',
+        'tablib.packages.openpyxl3',
+        'tablib.packages.openpyxl3.shared',
+        'tablib.packages.openpyxl3.reader',
+        'tablib.packages.openpyxl3.writer',
         'tablib.packages.yaml',
         'tablib.packages.unicodecsv'
     ],
@@ -75,4 +80,5 @@ setup(
         'Programming Language :: Python :: 3.1',
         'Programming Language :: Python :: 3.2',
     ),
+    tests_require=['pytest'],
 )

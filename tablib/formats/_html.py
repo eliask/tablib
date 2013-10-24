@@ -14,7 +14,9 @@ extensions = ('html', )
 
 
 def export_set(dataset):
-	"""HTML representation of a Dataset."""
+	"""HTML representation of a Dataset.
+
+    Returns a UTF8-encoded string."""
 
 	stream = StringIO()
 
@@ -37,7 +39,7 @@ def export_set(dataset):
 
 	page.table.close()
 
-	stream.writelines(str(page))
+	stream.writelines(unicode(page).encode('utf8'))
 
 	return stream.getvalue()
 

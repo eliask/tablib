@@ -3,13 +3,12 @@
 
 """Tests for Tablib."""
 
-import unittest
-import sys
+import json
 import os
+import sys
 import tablib
+import unittest
 from tablib.compat import markup, unicode
-
-
 
 
 
@@ -335,6 +334,22 @@ class TablibTestCase(unittest.TestCase):
         book.ods
 
 
+    def __unordered_dataset_equals(self, data1, data2):
+        "Test JSON deserialized dataset equality"
+        for row1, row2 in zip(data1, data2):
+            self.assertEqual(set(row1.items()), set(row2.items()))
+
+    def __json_book_equals(self, json1, json2):
+        "Test JSON structure while disregarding object arbitrary order"
+        for ds1, ds2 in zip(*map(json.loads, [json1, json2])):
+            self.assertEqual(ds1['title'], ds2['title'])
+            self.__unordered_dataset_equals(ds1['data'], ds2['data'])
+
+    def __json_dataset_equals(self, json1, json2):
+        "Test JSON structure while disregarding object arbitrary order"
+        ds1, ds2 = map(json.loads, [json1, json2])
+        self.__unordered_dataset_equals(ds1, ds2)
+
     def test_json_import_set(self):
         """Generate and import JSON set serialization."""
         data.append(self.john)
@@ -345,7 +360,7 @@ class TablibTestCase(unittest.TestCase):
 
         data.json = _json
 
-        self.assertEqual(_json, data.json)
+        self.__json_dataset_equals(_json, data.json)
 
 
     def test_json_import_book(self):
@@ -359,8 +374,7 @@ class TablibTestCase(unittest.TestCase):
 
         book.json = _json
 
-        self.assertEqual(_json, book.json)
-
+        self.__json_book_equals(_json, book.json)
 
     def test_yaml_import_set(self):
         """Generate and import YAML set serialization."""

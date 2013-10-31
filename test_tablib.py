@@ -676,12 +676,12 @@ class TablibTestCase(unittest.TestCase):
 
         self.assertEquals(
             """
-first_name|last_name |gpa   
+first_name| last_name|   gpa
 ----------|----------|------
-John      |Adams     |90    
-George    |Washington|67    
-Thomas    |Jefferson |50    
-Old       |Man       |100500
+      John|     Adams|    90
+    George|Washington|    67
+    Thomas| Jefferson|    50
+       Old|       Man|100500
 """.strip(),
             unicode(self.founders)
         )

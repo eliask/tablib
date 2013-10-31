@@ -279,7 +279,7 @@ class TablibTestCase(unittest.TestCase):
             html.tr(markup.oneliner.td(founder))
 
         html.table.close()
-        html = str(html)
+        html = unicode(html).encode('utf8')
 
         self.assertEqual(html, self.founders.html)
 
@@ -297,7 +297,7 @@ class TablibTestCase(unittest.TestCase):
         html.tr(markup.oneliner.td(['foo','', 'bar']))
 
         html.table.close()
-        html = str(html)
+        html = unicode(html).encode('utf8')
 
         headers = ['foo', None, 'bar'];
         d = tablib.Dataset(['foo', None, 'bar'], headers=headers)

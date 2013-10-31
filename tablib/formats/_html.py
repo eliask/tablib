@@ -5,7 +5,7 @@
 
 import sys
 import tablib
-from tablib.compat import markup, StringIO
+from tablib.compat import StringIO, markup, unicode
 
 BOOK_ENDINGS = 'h3'
 
@@ -17,8 +17,6 @@ def export_set(dataset):
 	"""HTML representation of a Dataset.
 
     Returns a UTF8-encoded string."""
-
-	stream = StringIO()
 
 	page = markup.page()
 	page.table.open()
@@ -39,9 +37,7 @@ def export_set(dataset):
 
 	page.table.close()
 
-	stream.writelines(unicode(page).encode('utf8'))
-
-	return stream.getvalue()
+	return unicode(page).encode('utf8')
 
 
 def export_book(databook):

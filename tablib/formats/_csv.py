@@ -3,6 +3,7 @@
 """ Tablib - CSV Support.
 """
 
+import tablib
 from tablib.compat import is_py3, csv, StringIO
 
 
@@ -49,7 +50,7 @@ def import_set(dset, in_stream, headers=True):
 def detect(stream):
     """Returns True if given stream is valid CSV."""
     try:
-        csv.Sniffer().sniff(stream)
+        import_set(tablib.Dataset(), stream)
         return True
     except (csv.Error, TypeError):
         return False
